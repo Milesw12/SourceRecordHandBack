@@ -1,14 +1,34 @@
 #imports
 import csv
+import os
+import tkinter as tk
+from tkinter import filedialog
+
+
 
 
 #initialisation
+##Variables
 file_row = []
-def append_list(file_name, list_of_elem):
+directory = None
+n = 0
+file_name = 'form.csv'
+headers = ['Filename', 'Version', 'Mediatype']
+#Functions
+
+def append_list(file_name, file_row):
     with open(file_name, 'a') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(list_of_elem)
+        writer.writerow(file_row)
 
+
+root = tk.Tk()
+root.withdraw()
+
+with open('form.csv', 'a') as csvfile:
+    writer = csv.DictWriter(csvfile, delimiter=',', lineterminator='\n',fieldnames=headers)
+    writer.writeheader()
+csvfile.close()
 #main
 #while true:
  #   with open('form.csv', 'a') as csvfile:
@@ -16,5 +36,14 @@ def append_list(file_name, list_of_elem):
    #     writer.write
 
 
+directory = filedialog.askdirectory()
+#logs the selected folder
+print(directory)
 
-append_list('form.csv', file_row)
+
+for file in os.listdir(directory):
+    #prints name of file
+    print(file)
+
+    append_list('form.csv', file_row)
+    
