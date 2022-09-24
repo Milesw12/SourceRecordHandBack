@@ -25,10 +25,9 @@ def append_list(file_name, file_row):
 root = tk.Tk()
 root.withdraw()
 
-with open('form.csv', 'a') as csvfile:
-    writer = csv.DictWriter(csvfile, delimiter=',', lineterminator='\n',fieldnames=headers)
-    writer.writeheader()
-csvfile.close()
+with open('form.csv', 'w', newline='\n') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(headers)
 #main
 #while true:
  #   with open('form.csv', 'a') as csvfile:
