@@ -14,7 +14,7 @@ directory = None
 name = None
 version = None
 filetype = None
-file_row = [name, version, filetype]
+
 n = 0
 file_name = 'form.csv'
 headers = ['Filename', 'Version', 'Mediatype']
@@ -22,10 +22,10 @@ sep = '_'
 sep2 = '.'
 #Functions
 
-def append_list(file_name, file_row):
+def append_list(file_name):
     with open(file_name, 'a') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(file_row)
+        writer.writerow([name, version, filetype])
 
 
 root = tk.Tk()
@@ -66,5 +66,5 @@ for file in os.listdir(directory):
     filetype = filetype[1]
     print(filetype)
 
-    append_list('form.csv', file_row)
+    append_list('form.csv')
     
