@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import ttk
 from tkinter.messagebox import showinfo, showwarning, showerror
+import Template_Creator 
 
 
 
@@ -47,6 +48,7 @@ def Filesort(filetype1):
     else:
         filetype = filetype1
     return filetype
+
 
 #writes headers into form
 with open('form.csv', 'w', newline='\n') as csvfile:
@@ -93,6 +95,16 @@ for root, dirs, files in os.walk(directory):
             append_list('form.csv')
     
 if counter == sum(1 for _, _, files in os.walk(directory) for f in files):
-    showinfo('Info','Code run sucessfully file can be found in '+ os.getcwd() + '/form.csv')
+    showinfo('Info','Code run sucessfully file can be found in '+ os.getcwd() + '/SourceRecord.csv')
 else:
     showerror('Error', 'There was an issue with the CSV creation please review the '+ os.getcwd() + '/form.csv')
+
+with open(file_name, newline='') as in_file:
+    with open("SourceRecord.csv", 'w', newline='') as out_file:
+        writer = csv.writer(out_file)
+        for row in csv.reader(in_file):
+            if any(row) or any(field.strip() for field in row):
+                writer.writerow(row)
+
+os.remove("form.csv")
+
