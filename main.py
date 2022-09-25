@@ -23,6 +23,7 @@ file_name = 'form.csv'
 headers = ['Filename', 'Version', 'Mediatype']
 sep = '_'
 sep2 = '.'
+extensions = ['.pdf','.dgn','.DGN', '.PDF', '.tiff', '.tif', '.TIFF', '.TIF', '.PNG', '.png', '.JPEG', '.BMP', '.JPG', '.jpeg', '.bmp', '.jpg']
 #Functions
 
 root = tk.Tk()
@@ -51,30 +52,33 @@ directory = filedialog.askdirectory()
 print(directory)
 
 #lists documents
-for file in os.listdir(directory):
-    counter = counter + 1
-#prints name of file
-    #print(file)
-    name = file.split(sep, 1)[0]
-    #print(name)
+for root, dirs, files in os.walk(directory):
+    for file in files:
+        print()
+        if any(file.endswith(s) for s in extensions):
+            counter = counter + 1
+            print(counter)
+        #prints name of file
+            #print(file)
+            name = file.split(sep, 1)[0]
+            print(name)
 
 
-#version deriving
-    version1 = file.split(sep, 1)
-    print(version1)
-    version1 = version1[1]
-    version = version1.split(sep2, 1)[0]
-    #print(version)
+        #version deriving
+            version1 = file.split(sep, 1)
+            version1 = version1[1]
+            version = version1.split(sep2, 1)[0]
+            print(version)
 
 
-#filetype derviving
-    filetype = version1.split(sep2, 1)
-    filetype = filetype[1]
-    #print(filetype)
+        #filetype derviving
+            filetype = version1.split(sep2, 1)
+            filetype = filetype[1]
+            print(filetype)
 
-    append_list('form.csv')
+            append_list('form.csv')
     
-if counter == len(os.listdir(directory)):
+if counter == sum(1 for _, _, files in os.walk(directory) for f in files):
     showinfo('Info','Code run sucessfully file can be found in '+ os.getcwd() + '/form.csv')
 else:
     showerror('Error', 'There was an issue with the CSV creation please review the '+ os.getcwd() + '/form.csv')
