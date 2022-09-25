@@ -61,6 +61,7 @@ for file in os.listdir(directory):
 
 #version deriving
     version1 = file.split(sep, 1)
+    print(version1)
     version1 = version1[1]
     version = version1.split(sep2, 1)[0]
     #print(version)
