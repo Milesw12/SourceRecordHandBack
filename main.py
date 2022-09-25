@@ -24,6 +24,7 @@ headers = ['Filename', 'Version', 'Mediatype']
 sep = '_'
 sep2 = '.'
 extensions = ['.pdf','.dgn','.DGN', '.PDF', '.tiff', '.tif', '.TIFF', '.TIF', '.PNG', '.png', '.JPEG', '.BMP', '.JPG', '.jpeg', '.bmp', '.jpg']
+ESR = ['tiff', 'tif', 'png', 'jpeg', 'bmp', 'jpg']
 #Functions
 
 root = tk.Tk()
@@ -35,6 +36,17 @@ def append_list(file_name):
         writer.writerow([name, version, filetype])
         
 
+def Filesort(filetype1):
+
+    if str(filetype1).lower() == 'dgn' :
+        filetype = 'CAD'
+    elif str(filetype1).lower() == 'pdf':
+        filetype = 'PDF'
+    elif str(filetype1).lower() in ESR:
+        filetype = 'ESR'
+    else:
+        filetype = filetype1
+    return filetype
 
 #writes headers into form
 with open('form.csv', 'w', newline='\n') as csvfile:
@@ -71,9 +83,11 @@ for root, dirs, files in os.walk(directory):
             print(version)
 
 
-        #filetype derviving
-            filetype = version1.split(sep2, 1)
-            filetype = filetype[1]
+        #filetype deriving
+            filetype1 = version1.split(sep2, 1)
+            filetype1 = filetype1[1]
+            print(filetype1)
+            filetype = Filesort(filetype1)
             print(filetype)
 
             append_list('form.csv')
