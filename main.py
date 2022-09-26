@@ -61,6 +61,7 @@ with open('form.csv', 'w', newline='\n') as csvfile:
    #     writer.write
 
 #prompts for location of records
+
 directory = filedialog.askdirectory()
 #logs the selected folder
 print(directory)
@@ -71,26 +72,26 @@ for root, dirs, files in os.walk(directory):
         print()
         if any(file.endswith(s) for s in extensions):
             counter = counter + 1
-            print(counter)
+            #print(counter)
         #prints name of file
             #print(file)
             name = file.split(sep, 1)[0]
-            print(name)
+            #print(name)
 
 
         #version deriving
             version1 = file.split(sep, 1)
             version1 = version1[1]
             version = version1.split(sep2, 1)[0]
-            print(version)
+            #print(version)
 
 
         #filetype deriving
             filetype1 = version1.split(sep2, 1)
             filetype1 = filetype1[1]
-            print(filetype1)
+            #print(filetype1)
             filetype = Filesort(filetype1)
-            print(filetype)
+            #print(filetype)
 
             append_list('form.csv')
     
@@ -108,3 +109,4 @@ with open(file_name, newline='') as in_file:
 
 os.remove("form.csv")
 
+Template_Creator.Word_import('SourceRecord.csv')
